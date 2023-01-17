@@ -59,14 +59,27 @@ router.post("/:id", (req, res) => {
 });
 
 router.get("/edit/:id", (req, res) => {
-    // read file
+    //read file
+    fs.readFile('./public/data/todos.json', (err, data) => {
+        if(err) throw err;
+    })
     // find the index
+    let todos = JSON.parse(data);
+    let todo = todos.find(todo => todo.id == req.params.id);
+    let index = todos.indexOf(todo);
     // send to the render of edit page,
-})
+    res.render('pages/edit');
+});
 
 router.post("/edit/:id", (req, res)=> {
     // read file
+    fs.readFile('./public/data/todos.json', (err, data) => {
+        if(err) throw err;
+    })
     // find index
+    let todos = JSON.parse(data);
+    let todo = todos.find(todo => todo.id == req.params.id);
+    let index = todos.indexOf(todo);
     //change object related with request body
     // write file again
     // redirect
