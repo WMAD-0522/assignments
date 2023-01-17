@@ -1,20 +1,5 @@
 [
-  {
-    "id": 3,
-    "title": "AAA",
-    "description": "AAA",
-    "completed": true
-  },
-  {
-    "id": 2,
-    "title": "VVV",
-    "description": " VVV",
-    "completed": true
-  },
-  {
-    "id": 1,
-    "title": "DDDD",
-    "description": " DDDDD",
-    "completed": true
-  }
+  { "id": 3, "title": "AAA     ", "description": "AAA", "completed": true },
+  { "id": 2, "title": "VVV", "description": " VVV", "completed": true },
+  { "id": 1, "title": "DDDD", "description": " DDDDD", "completed": true }
 ]
