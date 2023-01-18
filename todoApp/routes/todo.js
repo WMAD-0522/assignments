@@ -88,7 +88,7 @@ router.post("/edit/:id", (req, res)=> {
     todo.description = req.body.description;
     todo.completed = req.body.completed;
 
-    fs.write('./public/data/todos.json', JSON.stringify(todos), (err) => {
+    fs.writeFile('./public/data/todos.json', JSON.stringify(todos), (err) => {
         if(err) throw err;
         // redirect
         res.redirect('/');
