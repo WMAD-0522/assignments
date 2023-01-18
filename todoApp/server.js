@@ -3,6 +3,7 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import header from "./middleware/header.js";
 import todoRoutes from "./routes/todo.js";
+import db from "./config.js"
 
 const app = express();
 
