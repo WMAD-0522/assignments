@@ -1,5 +1,5 @@
 import express from "express";
-import fs from "fs";
+import fs, { appendFile } from "fs";
 
 const router = express.Router();
 
@@ -58,31 +58,50 @@ router.post("/:id", (req, res) => {
 
 });
 
+
 router.get("/edit/:id", (req, res) => {
     //read file
     fs.readFile('./public/data/todos.json', (err, data) => {
         if(err) throw err;
+        // find the index
+        let todos = JSON.parse(data);
+        let todo = todos.find(todo => todo.id == req.params.id);
+        let index = todos.indexOf(todo);
+        // send to the render of edit page,
+        res.render('pages/edit', {
+            todo: todo
+        });
     })
-    // find the index
-    let todos = JSON.parse(data);
-    let todo = todos.find(todo => todo.id == req.params.id);
-    let index = todos.indexOf(todo);
-    // send to the render of edit page,
-    res.render('pages/edit');
 });
 
 router.post("/edit/:id", (req, res)=> {
     // read file
     fs.readFile('./public/data/todos.json', (err, data) => {
         if(err) throw err;
-    })
+
     // find index
     let todos = JSON.parse(data);
     let todo = todos.find(todo => todo.id == req.params.id);
     let index = todos.indexOf(todo);
+    todo.title = req.body.title;
+    todo.description = req.body.description;
+    todo.completed = req.body.completed;
     //change object related with request body
+    // todos.splice(index, 1);
+    // let editedTodo = {
+    //     id: todo.id,
+    //     title: req.body.title,
+    //     description: req.body.description,
+    //     completed: req.body.completed
+    // }
+    // todos.splice(index, 0, editedTodo);
     // write file again
-    // redirect
+    fs.write('./public/data/todos.json', JSON.stringify(todos), (err) => {
+        if(err) throw err;
+        // redirect
+        res.redirect('/');
+    })
+    })
 })
 
 export default router;
