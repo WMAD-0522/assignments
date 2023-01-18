@@ -4,9 +4,32 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit</title>
+    <link rel="stylesheet" href="/styles/styles.css">
+    <title><%= title %> </title>
 </head>
 <body>
-    <h1><%= todo.title %></h1>
+    <%- include("../partials/header.ejs") %>
+
+    <h1>Edit to do</h1>
+    <form action="/edit/<%= todo.id %> " method="POST">
+        <div class="form-control">
+            <label for="title">Title</label>
+            <input type="text" name="title" value="<%= todo.title %>"/>
+        </div>
+
+        <div class="form-control">
+            <label for="description">Description</label>
+            <textarea name="description" cols="30" rows="10"><%= todo.description %></textarea>
+        </div>
+
+        <div class="form-control completed">
+            <label for="completed" >Completed</label>
+            <input type="checkbox" name="completed" <%= todo.completed ? 'checked' : ''%> />
+        </div>
+
+        <button type="submit" >Submit</button>
+    </form>
+
+    <%- include("../partials/footer.ejs") %>
 </body>
 </html>
